@@ -11,6 +11,8 @@
     --Rose-900: hsl(14, 65%, 9%);
 }
 
+/* GENERAL STYLES */
+
 body {
     margin: 0;
     padding: 0;
@@ -29,12 +31,9 @@ ul {
     padding: 0;
 }
 
-.attribution {
-    font-size: 11px;
-    text-align: center;
-}
-.attribution a {
-    color: hsl(228, 45%, 44%);
+button {
+    font-family: inherit;
+    font-size: inherit;
 }
 
 main {
@@ -45,9 +44,54 @@ main {
     padding: 4rem;
 }
 
+/* CLASS STYLES */
+
+/* Main Styles - Product Display */
+
+.product-display h1 {
+    font-size: 2.3rem;
+}
+
 .product-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    align-items: end;
+}
+
+/* Main Styles - Product List */
+
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.product > * {
+    margin: 0;
+}
+
+.product__category {
+    margin-top: 1rem;
+
+    opacity: 50%;
+}
+
+.product__name {
+    font-weight: 600;
+}
+
+.product__price {
+    color: var(--Red);
+    font-weight: 600;
+}
+
+/* Footer Styles */
+
+.attribution {
+    font-size: 11px;
+    text-align: center;
+}
+.attribution a {
+    color: hsl(228, 45%, 44%);
 }

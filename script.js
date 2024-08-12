@@ -42,18 +42,18 @@ function createListElement(product) {
     categoryElement.classList.add("product__category");
 
     const priceElement = document.createElement("p");
-    priceElement.textContent = product.price;
-    priceElement.classList.add("product__PRICE");
+    priceElement.textContent = `$${product.price.toFixed(2)}`;
+    priceElement.classList.add("product__price");
 
     const picElement = createPictureElement(product.image);
 
     const listElement = document.createElement("li");
     listElement.classList.add("product");
 
-    listElement.appendChild(nameElement, categoryElement);
-    listElement.appendChild(categoryElement);
-    listElement.appendChild(priceElement);
     listElement.appendChild(picElement);
+    listElement.appendChild(categoryElement);
+    listElement.appendChild(nameElement);
+    listElement.appendChild(priceElement);
 
     return listElement;
 }
