@@ -48,7 +48,9 @@ function createListElement(product) {
     const picElement = createPictureElement(product.image);
 
     const listElement = document.createElement("li");
-    listElement.appendChild(nameElement);
+    listElement.classList.add("product");
+
+    listElement.appendChild(nameElement, categoryElement);
     listElement.appendChild(categoryElement);
     listElement.appendChild(priceElement);
     listElement.appendChild(picElement);
