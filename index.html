@@ -24,19 +24,82 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        Desserts Waffle with Berries Waffle 6.50 Add to Cart Vanilla Bean Crème
-        Brûlée Crème Brûlée 7.00 Add to Cart Macaron Mix of Five Macaron 8.00
-        Add to Cart Classic Tiramisu Tiramisu 5.50 Add to Cart Pistachio Baklava
-        Baklava 4.00 Add to Cart Lemon Meringue Pie Pie 5.00 Add to Cart Red
-        Velvet Cake Cake 4.50 Add to Cart Salted Caramel Brownie Brownie 4.50
-        Add to Cart Vanilla Panna Cotta Panna Cotta 6.50 Add to Cart Your Cart (<!-- Quantity -->)
-        Your added items will appear here
+        <main>
+            <section class="product-display">
+                <h1>Desserts</h1>
+                <ul>
+                    <li class="product">
+                        <p class="product__heading">Waffle with Berries</p>
+                        <p class="product__type">Waffle</p>
+                        <p class="product__price">6.50</p>
+                        <button>Add to Cart</button>
+                    </li>
+                    <li class="product">
+                        <p class="product__heading">
+                            Vanilla Bean Crème Brûlée
+                        </p>
+                        <p class="product__type">Crème Brûlée</p>
+                        <p class="product__price">7.00</p>
+                        <button>Add to Cart</button>
+                    </li>
+                    <li class="product">
+                        <p class="product__heading">Macaron Mix of Five</p>
+                        <p class="product__type">Macaron</p>
+                        <p class="product__price">8.00</p>
+                        <button>Add to Cart</button>
+                    </li>
+                    <li class="product">
+                        <p class="product__heading">Classic Tiramisu</p>
+                        <p class="product__type">Tiramisu</p>
+                        <p class="product__price">5.50</p>
+                        <button>Add to Cart</button>
+                    </li>
+                    <li class="product">
+                        <p class="product__heading">Pistachio Baklava</p>
+                        <p class="product__type">Baklava</p>
+                        <p class="product__price">4.00</p>
+                        <button>Add to Cart</button>
+                    </li>
+                    <li>
+                        <p class="product__heading">Lemon Meringue Pie</p>
+                        <p class="product__type">Pie</p>
+                        <p class="product__price">5.00</p>
+                        <button>Add to Cart</button>
+                    </li>
+                    <li class="product">
+                        <p class="product__heading">Red Velvet Cake</p>
+                        <p class="product__type">Cake</p>
+                        <p class="product__price">4.50</p>
+                        <button>Add to Cart</button>
+                    </li>
+                    <li class="product">
+                        <p class="product__heading">Salted Caramel Brownie</p>
+                        <p class="product__type">Brownie</p>
+                        <p class="product__price">4.50</p>
+                        <button>Add to Cart</button>
+                    </li>
+                    <li class="product">
+                        <p class="product__heading">Vanilla Panna Cotta</p>
+                        <p class="product__type">Panna Cotta</p>
+                        <p class="product__price">6.50</p>
+                        <button>Add to Cart</button>
+                    </li>
+                </ul>
+            </section>
 
-        <div class="attribution">
-            Challenge by
-            <a href="https://www.frontendmentor.io?ref=challenge"
-                >Frontend Mentor</a
-            >. Coded by <a href="#">Your Name Here</a>.
-        </div>
+            <section class="basket">
+                <h2>Your Cart (<span id="basket-quantity"></span>)</h2>
+                <p>Your added items will appear here</p>
+            </section>
+        </main>
+
+        <footer>
+            <div class="attribution">
+                Challenge by
+                <a href="https://www.frontendmentor.io?ref=challenge"
+                    >Frontend Mentor</a
+                >. Coded by <a href="#">W.A. Smith</a>.
+            </div>
+        </footer>
     </body>
 </html>
