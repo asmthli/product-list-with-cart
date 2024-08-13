@@ -70,8 +70,6 @@ main {
 .product {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 0.5rem;
 }
 
 .product > * {
@@ -91,6 +89,8 @@ main {
 .product__price {
     color: var(--Red);
     font-weight: 600;
+
+    margin-top: auto;
 }
 
 .button-container {
@@ -118,8 +118,8 @@ main {
     display: inline;
 }
 
-.product--in-basket {
-    outline: 1px solid --Red;
+.product--outlined {
+    outline: 2px solid var(--Red);
 }
 
 /* Main Styles - Basket */

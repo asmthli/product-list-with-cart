@@ -1,6 +1,10 @@
 const TABLET_BREAKPOINT = "768px";
 const DESKTOP_BREAKPOINT = "1024px";
 
+var totalBasketItems = 0;
+var basketCostTotal = 0;
+var productCounts = {};
+
 async function getProducts() {
     const response = await fetch("./data.json");
     const products = await response.json();
@@ -41,6 +45,7 @@ function createButton() {
     button.innerText = "Add to Cart";
     button.appendChild(basketImage);
     button.classList.add("add-to-cart-button");
+    button.addEventListener("click", addProductToCart);
 
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("button-container");
@@ -73,6 +78,8 @@ function createListElement(product) {
     listElement.appendChild(nameElement);
     listElement.appendChild(priceElement);
 
+    productCounts[product.name] = 0;
+
     return listElement;
 }
 
@@ -84,6 +91,29 @@ async function populateProductList() {
         const listElement = createListElement(product);
         productList.appendChild(listElement);
     }
+}
+
+function addProductToCart(e) {
+    const targetProduct = e.target.parentNode.parentNode;
+
+    // TODO: BUG: Possible to outline the button decoration.
+    targetProduct.querySelector("img").classList.add("product--outlined");
+    updateBasket(targetProduct);
+    updateTotalCost(targetProduct);
+}
+
+function updateBasket(product) {
+    const productName = product.querySelector(".product__name").textContent;
+    productCounts[productName]++;
+    totalBasketItems++;
+
+    document.querySelector("#basket-quantity").textContent = totalBasketItems;
+}
+
+function updateTotalCost(product) {
+    const productCost = product.querySelector(".product__price").textContent;
+
+    basketCostTotal += Number(productCost.slice(1));
 }
 
 populateProductList();
