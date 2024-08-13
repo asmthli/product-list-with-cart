@@ -11,6 +11,12 @@
     --Rose-900: hsl(14, 65%, 9%);
 }
 
+/* UTILITY CLASSES */
+
+.hidden {
+    display: none;
+}
+
 /* GENERAL STYLES */
 
 body {
@@ -84,6 +90,23 @@ main {
 .product__price {
     color: var(--Red);
     font-weight: 600;
+}
+
+/* Main Styles - Basket */
+
+.empty-cart-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.empty-cart-display p {
+    color: var(--Rose-500);
+    font-weight: 600;
+}
+
+.basket h2 {
+    color: var(--Red);
 }
 
 /* Footer Styles */

@@ -31,9 +31,16 @@
             </section>
 
             <section class="basket">
-                <h2>Your Cart (<span id="basket-quantity"></span>)</h2>
-                <p>Your added items will appear here</p>
-                <button>Confirm Order</button>
+                <h2>Your Cart (<span id="basket-quantity">0</span>)</h2>
+                <div class="empty-cart-display">
+                    <img
+                        src="/assets/images/illustration-empty-cart.svg"
+                        aria-hidden="true"
+                    />
+                    <p>Your added items will appear here</p>
+                </div>
+
+                <button class="hidden">Confirm Order</button>
             </section>
         </main>
 
