@@ -32,6 +32,23 @@ function createPictureElement(imageSources) {
     return picElement;
 }
 
+function createButton() {
+    const basketImage = document.createElement("img");
+    basketImage.setAttribute("src", "/assets/images/icon-add-to-cart.svg");
+
+    const button = document.createElement("button");
+
+    button.innerText = "Add to Cart";
+    button.appendChild(basketImage);
+    button.classList.add("add-to-cart-button");
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
+    buttonContainer.appendChild(button);
+
+    return buttonContainer;
+}
+
 function createListElement(product) {
     const nameElement = document.createElement("p");
     nameElement.textContent = product.name;
@@ -51,6 +68,7 @@ function createListElement(product) {
     listElement.classList.add("product");
 
     listElement.appendChild(picElement);
+    listElement.appendChild(createButton());
     listElement.appendChild(categoryElement);
     listElement.appendChild(nameElement);
     listElement.appendChild(priceElement);
