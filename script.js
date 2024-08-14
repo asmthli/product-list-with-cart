@@ -207,12 +207,19 @@ function updateCartRow(product) {
         .querySelector(".product__price")
         .textContent.slice(1);
     const productName = product.querySelector(".product__name").textContent;
+
+    const productId = productIds[productName];
+
+    document.querySelector(
+        `#p${productId} .cart-row__quantity`
+    ).textContent = `${productCounts[productName]}x`;
+
     const productTotalCost =
         Number(productIndividualCost) * productCounts[productName];
 
     document.querySelector(
-        ".cart-row__quantity"
-    ).textContent = `${productCounts[productName]}x`;
+        `#p${productId} .cart-row__combinedPrice`
+    ).textContent = `$${productTotalCost.toFixed(2)}`;
 }
 
 function updateBasketTotalCost(product) {
