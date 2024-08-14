@@ -1,13 +1,20 @@
 const TABLET_BREAKPOINT = "768px";
 const DESKTOP_BREAKPOINT = "1024px";
 
-var totalcartItems = 0;
+var totalCartItems = 0;
 var cartCostTotal = 0;
 var productCounts = {};
+var productIds = {};
 
 async function getProducts() {
     const response = await fetch("./data.json");
     const products = await response.json();
+
+    let productIndex = 1;
+    for (let product of products) {
+        productIds[product.name] = productIndex;
+        productIndex++;
+    }
 
     return products;
 }
@@ -87,8 +94,11 @@ function createCartRow(product) {
     const container = document.createElement("div");
     container.classList.add("cart-row");
 
+    const productName = product.querySelector(".product__name").textContent;
+    container.id = `p${productIds[productName]}`;
+
     const name = document.createElement("p");
-    name.textContent = product.querySelector(".product__name").textContent;
+    name.textContent = productName;
     name.classList.add("cart-row__name");
     container.appendChild(name);
 
@@ -148,23 +158,31 @@ async function populateProductList() {
 }
 
 function addProductToCart(e) {
-    if (totalcartItems == 0) {
+    if (totalCartItems == 0) {
         setCartNonEmpty();
     }
 
     const targetProduct = e.target.parentNode.parentNode;
+    const productName =
+        targetProduct.querySelector(".product__name").textContent;
+
+    if (productCounts[productName] == 0) {
+        const cartRow = createCartRow(targetProduct);
+
+        const cartElement = document.querySelector(".cart");
+        const cartTotalElement = cartElement.querySelector(
+            ".cart__total-price-section"
+        );
+        cartElement.insertBefore(cartRow, cartTotalElement);
+    }
 
     // TODO: BUG: Possible to outline the button decoration.
     targetProduct.querySelector("img").classList.add("product--outlined");
-    updatecart(targetProduct);
-    updateTotalCost(targetProduct);
 
-    const cartRow = createCartRow(targetProduct);
-    const cartElement = document.querySelector(".cart");
-    const cartTotalElement = cartElement.querySelector(
-        ".cart__total-price-section"
-    );
-    cartElement.insertBefore(cartRow, cartTotalElement);
+    productCounts[productName]++;
+    totalCartItems++;
+
+    updateCart(targetProduct);
 }
 
 function setCartNonEmpty() {
@@ -178,15 +196,26 @@ function setCartNonEmpty() {
     cart.insertBefore(createCartTotalElement(), cartButtonElement);
 }
 
-function updatecart(product) {
-    const productName = product.querySelector(".product__name").textContent;
-    productCounts[productName]++;
-    totalcartItems++;
-
-    document.querySelector("#cart-quantity").textContent = totalcartItems;
+function updateCart(product) {
+    document.querySelector("#cart-quantity").textContent = totalCartItems;
+    updateCartRow(product);
+    updateBasketTotalCost(product);
 }
 
-function updateTotalCost(product) {
+function updateCartRow(product) {
+    const productIndividualCost = product
+        .querySelector(".product__price")
+        .textContent.slice(1);
+    const productName = product.querySelector(".product__name").textContent;
+    const productTotalCost =
+        Number(productIndividualCost) * productCounts[productName];
+
+    document.querySelector(
+        ".cart-row__quantity"
+    ).textContent = `${productCounts[productName]}x`;
+}
+
+function updateBasketTotalCost(product) {
     const productCost = product.querySelector(".product__price").textContent;
     cartCostTotal += Number(productCost.slice(1));
 
