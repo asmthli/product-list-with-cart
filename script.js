@@ -83,6 +83,43 @@ function createListElement(product) {
     return listElement;
 }
 
+function createCartRow(product) {
+    const container = document.createElement("div");
+    container.classList.add("cart-row");
+
+    const name = document.createElement("p");
+    name.textContent = product.querySelector(".product__name").textContent;
+    name.classList.add("cart-row__name");
+    container.appendChild(name);
+
+    const quantity = document.createElement("p");
+    quantity.textContent = "1x";
+    quantity.classList.add("cart-row__quantity");
+    container.appendChild(quantity);
+
+    const individualCost = document.createElement("p");
+    individualCost.textContent =
+        product.querySelector(".product__price").textContent;
+    individualCost.classList.add("cart-row__individualPrice");
+    container.appendChild(individualCost);
+
+    const totalCost = document.createElement("p");
+    totalCost.textContent =
+        product.querySelector(".product__price").textContent;
+    totalCost.classList.add("cart-row__combinedPrice");
+    container.appendChild(totalCost);
+
+    const removeButton = document.createElement("button");
+    const buttonImg = document.createElement("img");
+    buttonImg.setAttribute("src", "/assets/images/icon-remove-item.svg");
+    removeButton.appendChild(buttonImg);
+    removeButton.classList.add("cart-remove-button");
+
+    container.appendChild(removeButton);
+
+    return container;
+}
+
 async function populateProductList() {
     const productList = document.getElementById("product-list");
     const productData = await getProducts();
@@ -94,12 +131,30 @@ async function populateProductList() {
 }
 
 function addProductToCart(e) {
+    if (totalBasketItems == 0) {
+        setCartNonEmpty();
+    }
+
     const targetProduct = e.target.parentNode.parentNode;
 
     // TODO: BUG: Possible to outline the button decoration.
     targetProduct.querySelector("img").classList.add("product--outlined");
     updateBasket(targetProduct);
     updateTotalCost(targetProduct);
+
+    const cartRow = createCartRow(targetProduct);
+    const basketElement = document.querySelector(".basket");
+    const basketButtonElement = basketElement.querySelector(
+        "#confirm-order-button"
+    );
+    basketElement.insertBefore(cartRow, basketButtonElement);
+}
+
+function setCartNonEmpty() {
+    const cart = document.querySelector(".basket");
+
+    cart.querySelector(".empty-cart-display").classList.add("hidden");
+    cart.querySelector("button").classList.remove("hidden");
 }
 
 function updateBasket(product) {

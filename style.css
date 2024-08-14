@@ -11,12 +11,6 @@
     --Rose-900: hsl(14, 65%, 9%);
 }
 
-/* UTILITY CLASSES */
-
-.hidden {
-    display: none;
-}
-
 /* GENERAL STYLES */
 
 body {
@@ -41,12 +35,13 @@ button {
     font-family: inherit;
     font-size: inherit;
     font-weight: 600;
+    cursor: pointer;
 }
 
 main {
     display: grid;
     grid-template-columns: 70% 1fr;
-    column-gap: 2rem;
+    column-gap: 4rem;
 
     padding: 4rem;
 }
@@ -139,6 +134,75 @@ main {
     color: var(--Red);
 }
 
+.basket .cart-row:not(:last-of-type) {
+    border-bottom: 2px solid var(--Rose-100);
+}
+
+/* Main Styles - Cart Row */
+
+.cart-row {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(4, auto) 1fr;
+    column-gap: 0.7rem;
+    row-gap: 0.7rem;
+
+    padding-bottom: 1.4rem;
+    margin-bottom: 1.4rem;
+}
+
+.cart-row > * {
+    margin: 0;
+}
+
+.cart-row__name {
+    grid-column: 1 / 5;
+    font-weight: 600;
+}
+
+.cart-row__quantity {
+    font-weight: 600;
+    color: var(--Red);
+}
+
+.cart-row__individualPrice::before {
+    content: "@";
+    margin-inline-end: 0.2rem;
+}
+
+.cart-row__individualPrice {
+    opacity: 70%;
+    color: var(--Rose-500);
+}
+
+.cart-row__combinedPrice {
+    font-weight: 600;
+    color: var(--Rose-500);
+}
+
+.cart-remove-button {
+    grid-column: 5;
+    grid-row: 1 / span 2;
+    justify-self: end;
+    align-self: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.2rem;
+
+    background: inherit;
+    border: 2px solid var(--Rose-400);
+    border-radius: 40px;
+}
+
+.cart-remove-button img {
+    width: 100%;
+}
+
 /* Footer Styles */
 
 .attribution {
@@ -147,4 +211,10 @@ main {
 }
 .attribution a {
     color: hsl(228, 45%, 44%);
+}
+
+/* UTILITY CLASSES */
+
+.hidden {
+    display: none;
 }
