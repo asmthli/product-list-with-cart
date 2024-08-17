@@ -1,10 +1,11 @@
 const TABLET_BREAKPOINT = "768px";
 const DESKTOP_BREAKPOINT = "1024px";
 
-var totalCartItems = 0;
-var cartCostTotal = 0;
-var productCounts = {};
-var productIds = {};
+let totalCartItems = 0;
+let cartCostTotal = 0;
+let productCounts = {};
+let productIds = {};
+let productIdToName = {};
 
 async function getProducts() {
     const response = await fetch("./data.json");
@@ -13,6 +14,7 @@ async function getProducts() {
     let productIndex = 1;
     for (let product of products) {
         productIds[product.name] = productIndex;
+        productIdToName[productIndex] = product.name;
         productIndex++;
     }
 
@@ -123,6 +125,7 @@ function createCartRow(product) {
     const buttonImg = document.createElement("img");
     buttonImg.setAttribute("src", "/assets/images/icon-remove-item.svg");
     removeButton.appendChild(buttonImg);
+    removeButton.addEventListener("click", removeItemFromCart);
     removeButton.classList.add("cart-remove-button");
 
     container.appendChild(removeButton);
@@ -162,7 +165,7 @@ function addProductToCart(e) {
         setCartNonEmpty();
     }
 
-    const targetProduct = e.target.parentNode.parentNode;
+    const targetProduct = e.target.closest(".product");
     const productName =
         targetProduct.querySelector(".product__name").textContent;
 
@@ -176,13 +179,24 @@ function addProductToCart(e) {
         cartElement.insertBefore(cartRow, cartTotalElement);
     }
 
-    // TODO: BUG: Possible to outline the button decoration.
     targetProduct.querySelector("img").classList.add("product--outlined");
 
     productCounts[productName]++;
     totalCartItems++;
 
     updateCart(targetProduct);
+}
+
+function removeItemFromCart(e) {
+    const itemId = e.target.closest(".cart-row").id.slice(1);
+    const itemName = productIdToName[itemId];
+
+    totalCartItems -= productCounts[itemName];
+    productCounts[itemName] = 0;
+
+    document.querySelector(`#p${itemId}`).remove();
+    updateBasketTotalCost();
+    updateCart();
 }
 
 function setCartNonEmpty() {
