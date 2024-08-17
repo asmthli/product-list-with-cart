@@ -81,3 +81,21 @@ function createButton() {
 
     return buttonContainer;
 }
+
+export function setProductSelected(product) {
+    product.querySelector("img").classList.add("product--outlined");
+}
+
+export function setProductUnselected(productName) {
+    const productListItems = document.querySelectorAll(".product");
+
+    for (let item of productListItems) {
+        if (
+            item.querySelector(".product__name").textContent ==
+            productName.replaceAll("_", " ")
+        ) {
+            item.querySelector("img").classList.remove("product--outlined");
+            break;
+        }
+    }
+}

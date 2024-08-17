@@ -1,4 +1,8 @@
 import { productInfo } from "./main.js";
+import {
+    setProductSelected,
+    setProductUnselected,
+} from "./product-list-manager.js";
 
 let totalCartItems = 0;
 let cartCostTotal = 0;
@@ -24,7 +28,7 @@ export function addProductToCart(e) {
         cartElement.insertBefore(cartRow, cartTotalElement);
     }
 
-    clickedProduct.querySelector("img").classList.add("product--outlined");
+    setProductSelected(clickedProduct);
 
     if (!productCounts[productName]) {
         productCounts[productName] = 1;
@@ -46,6 +50,8 @@ export function removeItemFromCart(e) {
     updateCart(productName, -1 * productCounts[productName]);
     productCounts[productName] = 0;
     cartRow.remove();
+
+    setProductUnselected(productName);
 
     if (totalCartItems == 0) {
         setCartEmpty();
