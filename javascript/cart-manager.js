@@ -49,10 +49,6 @@ export function removeItemFromCart(e) {
     cartRow.remove();
 
     setProductUnselected(productName);
-
-    if (totalCartItems == 0) {
-        setCartEmpty();
-    }
 }
 
 function createCartRow(productListItem) {
@@ -143,6 +139,10 @@ export function updateCart(changedProductName, changeQuantity) {
 
     const itemCost = productInfo[changedProductName].price;
     updateCartTotalCost(itemCost, changeQuantity);
+
+    if (totalCartItems == 0) {
+        setCartEmpty();
+    }
 }
 
 function updateCartRow(productName) {

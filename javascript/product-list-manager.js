@@ -135,10 +135,16 @@ function decrementProductQuantity(buttonClickEvent) {
         productElement.querySelector(".product__name").textContent;
     const productId = productName.replaceAll(" ", "_");
 
-    productCounts[productId]--;
-    productElement.querySelector(".incrementor-button__quantity").textContent =
-        productCounts[productId];
-    updateCart(productId, -1);
+    if (productCounts[productId] == 1) {
+        document.querySelector(`#row-${productId} button`).click();
+    } else {
+        productCounts[productId]--;
+        productElement.querySelector(
+            ".incrementor-button__quantity"
+        ).textContent = productCounts[productId];
+
+        updateCart(productId, -1);
+    }
 }
 
 function setSelectedButton(product) {
