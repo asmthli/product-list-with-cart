@@ -30,8 +30,12 @@ function createListElement(product) {
     const listElement = document.createElement("li");
     listElement.classList.add("product");
 
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
+    buttonContainer.appendChild(createButton());
+
     listElement.appendChild(picElement);
-    listElement.appendChild(createButton());
+    listElement.appendChild(buttonContainer);
     listElement.appendChild(categoryElement);
     listElement.appendChild(nameElement);
     listElement.appendChild(priceElement);
@@ -75,15 +79,47 @@ function createButton() {
     button.classList.add("add-to-cart-button");
     button.addEventListener("click", addProductToCart);
 
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("button-container");
-    buttonContainer.appendChild(button);
+    return button;
+}
 
-    return buttonContainer;
+function createIncrementorButtons() {
+    const incrementorDiv = document.createElement("div");
+    incrementorDiv.classList.add("incrementor-button");
+
+    const decreaseButton = document.createElement("button");
+    decreaseButton.classList.add("incrementor-button__button");
+    const decreaseImg = document.createElement("img");
+    decreaseImg.src = "assets/images/icon-decrement-quantity.svg";
+    decreaseButton.appendChild(decreaseImg);
+
+    const productQuantityElement = document.createElement("p");
+    productQuantityElement.classList.add("incrementor-button__quantity");
+    productQuantityElement.textContent = "T";
+
+    const increaseButton = document.createElement("button");
+    increaseButton.classList.add("incrementor-button__button");
+    const increaseImg = document.createElement("img");
+    increaseImg.src = "assets/images/icon-increment-quantity.svg";
+    increaseButton.appendChild(increaseImg);
+
+    incrementorDiv.appendChild(decreaseButton);
+    incrementorDiv.appendChild(productQuantityElement);
+    incrementorDiv.appendChild(increaseButton);
+
+    return incrementorDiv;
 }
 
 export function setProductSelected(product) {
     product.querySelector("img").classList.add("product--outlined");
+    setSelectedButton(product);
+}
+
+function setSelectedButton(product) {
+    const buttonContainer = product.querySelector(".button-container");
+    buttonContainer.querySelector(".add-to-cart-button").remove();
+
+    const incrementorButtons = createIncrementorButtons();
+    buttonContainer.appendChild(incrementorButtons);
 }
 
 export function setProductUnselected(productName) {
@@ -95,6 +131,10 @@ export function setProductUnselected(productName) {
             productName.replaceAll("_", " ")
         ) {
             item.querySelector("img").classList.remove("product--outlined");
+
+            const buttonContainer = item.querySelector(".button-container");
+            buttonContainer.querySelector(".incrementor-button").remove();
+            buttonContainer.appendChild(createButton());
             break;
         }
     }
