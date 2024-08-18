@@ -1,5 +1,6 @@
 import { populateProductList } from "./product-list-manager.js";
 import { cartSetup } from "./cart-manager.js";
+import { modalSetup } from "./modal.js";
 
 export let productInfo = {};
 
@@ -22,6 +23,7 @@ function indexProducts(rawProducts) {
     }
 }
 
+modalSetup();
 cartSetup();
 const rawProductData = await loadProducts();
 populateProductList(rawProductData);
