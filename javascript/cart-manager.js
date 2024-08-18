@@ -51,6 +51,14 @@ export function removeItemFromCart(e) {
     setProductUnselected(productName);
 }
 
+export function cartSetup() {
+    const confirmButton = document.querySelector("#confirm-order-button");
+    const modal = document.querySelector(".modal");
+    confirmButton.addEventListener("click", () => {
+        modal.showModal();
+    });
+}
+
 function createCartRow(productListItem) {
     const container = document.createElement("div");
     container.classList.add("cart-row");

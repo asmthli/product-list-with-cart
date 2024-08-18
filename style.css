@@ -260,6 +260,18 @@ main {
     width: 100%;
 }
 
+/* Main Styles - Modal */
+
+.modal {
+    border: none;
+    border-radius: 20px;
+}
+
+.modal::backdrop {
+    background-color: black;
+    opacity: 0.4;
+}
+
 /* Footer Styles */
 
 .attribution {
