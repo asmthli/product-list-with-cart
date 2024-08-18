@@ -61,6 +61,14 @@ export function cartSetup() {
     });
 }
 
+export function clearCart() {
+    const removeButtons = document.querySelectorAll(".cart-remove-button");
+
+    for (let button of removeButtons) {
+        button.click();
+    }
+}
+
 function createCartRow(productListItem) {
     const container = document.createElement("div");
     container.classList.add("cart-row");

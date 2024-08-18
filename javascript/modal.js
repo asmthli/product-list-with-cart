@@ -1,8 +1,14 @@
 import { productInfo } from "./main.js";
+import { clearCart } from "./cart-manager.js";
 
 export function modalSetup() {
     document.querySelector(".modal").addEventListener("close", () => {
         clearModalList();
+    });
+
+    document.querySelector(".modal__button").addEventListener("click", () => {
+        document.querySelector(".modal").close();
+        clearCart();
     });
 }
 
