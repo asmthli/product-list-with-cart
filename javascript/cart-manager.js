@@ -1,4 +1,4 @@
-import { productInfo } from "./main.js";
+import { productInfo, productCounts } from "./main.js";
 import {
     setProductSelected,
     setProductUnselected,
@@ -6,7 +6,6 @@ import {
 
 let totalCartItems = 0;
 let cartCostTotal = 0;
-let productCounts = {};
 
 export function addProductToCart(e) {
     if (totalCartItems == 0) {
@@ -35,7 +34,6 @@ export function addProductToCart(e) {
     } else {
         productCounts[productName]++;
     }
-    totalCartItems++;
 
     updateCart(productName, 1);
 }
@@ -46,7 +44,6 @@ export function removeItemFromCart(e) {
         .querySelector(".cart-row__name")
         .textContent.replaceAll(" ", "_");
 
-    totalCartItems -= productCounts[productName];
     updateCart(productName, -1 * productCounts[productName]);
     productCounts[productName] = 0;
     cartRow.remove();
@@ -139,7 +136,8 @@ function setCartNonEmpty() {
     cart.insertBefore(createCartTotalElement(), cartButtonElement);
 }
 
-function updateCart(changedProductName, changeQuantity) {
+export function updateCart(changedProductName, changeQuantity) {
+    totalCartItems += changeQuantity;
     document.querySelector("#cart-quantity").textContent = totalCartItems;
     updateCartRow(changedProductName);
 

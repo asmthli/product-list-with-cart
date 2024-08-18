@@ -1,4 +1,5 @@
-import { addProductToCart } from "./cart-manager.js";
+import { addProductToCart, updateCart } from "./cart-manager.js";
+import { productCounts } from "./main.js";
 
 const TABLET_BREAKPOINT = "768px";
 const DESKTOP_BREAKPOINT = "1024px";
@@ -88,16 +89,18 @@ function createIncrementorButtons() {
 
     const decreaseButton = document.createElement("button");
     decreaseButton.classList.add("incrementor-button__button");
+    decreaseButton.addEventListener("click", decrementProductQuantity);
     const decreaseImg = document.createElement("img");
     decreaseImg.src = "assets/images/icon-decrement-quantity.svg";
     decreaseButton.appendChild(decreaseImg);
 
     const productQuantityElement = document.createElement("p");
     productQuantityElement.classList.add("incrementor-button__quantity");
-    productQuantityElement.textContent = "T";
+    productQuantityElement.textContent = "1";
 
     const increaseButton = document.createElement("button");
     increaseButton.classList.add("incrementor-button__button");
+    increaseButton.addEventListener("click", incrementProductQuantity);
     const increaseImg = document.createElement("img");
     increaseImg.src = "assets/images/icon-increment-quantity.svg";
     increaseButton.appendChild(increaseImg);
@@ -112,6 +115,30 @@ function createIncrementorButtons() {
 export function setProductSelected(product) {
     product.querySelector("img").classList.add("product--outlined");
     setSelectedButton(product);
+}
+
+function incrementProductQuantity(buttonClickEvent) {
+    const productElement = buttonClickEvent.target.closest(".product");
+    const productName =
+        productElement.querySelector(".product__name").textContent;
+    const productId = productName.replaceAll(" ", "_");
+
+    productCounts[productId]++;
+    productElement.querySelector(".incrementor-button__quantity").textContent =
+        productCounts[productId];
+    updateCart(productId, 1);
+}
+
+function decrementProductQuantity(buttonClickEvent) {
+    const productElement = buttonClickEvent.target.closest(".product");
+    const productName =
+        productElement.querySelector(".product__name").textContent;
+    const productId = productName.replaceAll(" ", "_");
+
+    productCounts[productId]--;
+    productElement.querySelector(".incrementor-button__quantity").textContent =
+        productCounts[productId];
+    updateCart(productId, -1);
 }
 
 function setSelectedButton(product) {

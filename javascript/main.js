@@ -2,6 +2,8 @@ import { populateProductList } from "./product-list-manager.js";
 
 export let productInfo = {};
 
+export let productCounts = {};
+
 async function loadProducts() {
     const response = await fetch("./data.json");
     const products = await response.json();
