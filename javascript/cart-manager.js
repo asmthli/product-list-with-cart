@@ -101,7 +101,7 @@ function createCartRow(productListItem) {
 
     const removeButton = document.createElement("button");
     const buttonImg = document.createElement("img");
-    buttonImg.setAttribute("src", "/assets/images/icon-remove-item.svg");
+    buttonImg.setAttribute("src", "../assets/images/icon-remove-item.svg");
     removeButton.appendChild(buttonImg);
     removeButton.addEventListener("click", removeItemFromCart);
     removeButton.classList.add("cart-remove-button");
