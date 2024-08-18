@@ -1,12 +1,17 @@
 import { productInfo } from "./main.js";
 
-export function updateModal() {
+export function populateModal() {
     const cartRows = document.querySelectorAll(".cart-row");
     const orderSummaryList = document.querySelector(".modal__order-list");
 
     for (let cartRow of cartRows) {
         orderSummaryList.appendChild(createSummaryRow(cartRow));
     }
+
+    const orderTotalElement = document.querySelector(".modal__order-total");
+    const cartTotalElement = document.querySelector(".cart__total-price");
+
+    orderTotalElement.textContent = cartTotalElement.textContent;
 }
 
 function createSummaryRow(cartRow) {
