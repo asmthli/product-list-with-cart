@@ -1,4 +1,5 @@
 import { productInfo, productCounts } from "./main.js";
+import { updateModal } from "./modal.js";
 import {
     setProductSelected,
     setProductUnselected,
@@ -55,6 +56,7 @@ export function cartSetup() {
     const confirmButton = document.querySelector("#confirm-order-button");
     const modal = document.querySelector(".modal");
     confirmButton.addEventListener("click", () => {
+        updateModal();
         modal.showModal();
     });
 }
