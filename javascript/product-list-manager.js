@@ -71,7 +71,7 @@ function createPictureElement(imageSources) {
 
 function createButton() {
     const cartImage = document.createElement("img");
-    cartImage.setAttribute("src", "/assets/images/icon-add-to-cart.svg");
+    cartImage.setAttribute("src", "assets/images/icon-add-to-cart.svg");
 
     const button = document.createElement("button");
 
